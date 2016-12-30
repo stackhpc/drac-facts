@@ -1,16 +1,15 @@
-DRAC BIOS Facts
-===============
+DRAC Facts
+==========
 
-Role providing a module to gather facts about BIOS configuration on Dell
-machines with an iDRAC card.
+Role providing a module to gather facts about BIOS settings and RAID
+configuration on Dell machines with an iDRAC card.
 
 Requirements
 ------------
 
-The role provides a module, `drac_bios_facts`, that is dependent upon the
+The role provides a module, `drac_facts`, that is dependent upon the
 `python-dracclient` module. This must be installed in order for this module
 to function correctly.
-
 
 Role Variables
 --------------
@@ -29,11 +28,11 @@ This role may be used as follows:
 
     - hosts: dell-servers
       roles:
-        - role: markgoddard.drac-bios-facts
+        - role: stackhpc.drac-facts
       tasks:
-        - name: Gather facts about BIOS settings via DRAC
+        - name: Gather facts via DRAC
           local_action:
-            module: drac_bios_facts
+            module: drac_facts
             address: 1.2.3.4
             username: foo
             password: bar
@@ -49,6 +48,18 @@ This role may be used as follows:
         - name: Show gathered facts about unfinished jobs
           debug:
             var: drac_unfinished_jobs
+
+        - name: Show gathered facts about RAID controllers
+          debug:
+            var: drac_raid_controllers
+
+        - name: Show gathered facts about physical disks
+          debug:
+            var: drac_physical_disks
+
+        - name: Show gathered facts about virtual disks
+          debug:
+            var: drac_virtual_disks
 
 License
 -------
