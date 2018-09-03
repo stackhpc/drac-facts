@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: drac-facts
   author: Mark Goddard
   description: >
     Role to gather facts about BIOS settings and RAID configuration on Dell
