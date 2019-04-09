@@ -11,8 +11,8 @@ The role provides a module, `drac_facts`, that is dependent upon the
 `python-dracclient` module. This must be installed in order for this module
 to function correctly.
 
-Role Variables
---------------
+Module Arguments
+----------------
 
 `address`: IP address or hostname of the iDRAC BMC.
 
