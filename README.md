@@ -14,7 +14,11 @@ to function correctly.
 Role Variables
 --------------
 
-None
+`address`: IP address or hostname of the iDRAC BMC.
+
+`username`: Username credentials for the iDRAC.
+
+`password`: Password credentials for the iDRAC.
 
 Dependencies
 ------------
@@ -24,16 +28,17 @@ None
 Example Playbook
 ----------------
 
-This role may be used as follows:
+With the iDRAC BMCs in the inventory, this role may be used as follows:
 
-    - hosts: dell-servers
+    - hosts: dell-server-bmcs
+      gather_facts: false
       roles:
         - role: stackhpc.drac-facts
       tasks:
         - name: Gather facts via DRAC
           local_action:
             module: drac_facts
-            address: 1.2.3.4
+            address: "{{ ansible_host }}"
             username: foo
             password: bar
 

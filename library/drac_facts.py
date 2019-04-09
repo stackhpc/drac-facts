@@ -165,6 +165,16 @@ def get_bios_settings(bmc):
     return settings
 
 
+def get_nic_settings(bmc):
+    """Get all available NIC settings and permitted values.
+
+    :param bmc: A dracclient.client.DRACClient instance
+    :returns: A dict of NIC settings
+    """
+    nic_settings = bmc.list_nics()
+    return nic_settings
+
+
 def namedtuples_to_dicts(nts):
     """Convert a list of namedtuples to a list of dicts.
 
@@ -209,11 +219,13 @@ def get_facts(module):
     """
     bmc = build_client(module)
     bios_settings = get_bios_settings(bmc)
+    nic_settings = get_nic_settings(bmc)
     controllers, pdisks, vdisks = get_raid_config(bmc)
     jobs = get_jobs(bmc, False)
     unfinished_jobs = get_jobs(bmc, True)
     return {
         "drac_bios_settings": bios_settings,
+        "drac_nic_settings": nic_settings,
         "drac_jobs": jobs,
         "drac_unfinished_jobs": unfinished_jobs,
         "drac_raid_controllers": controllers,
